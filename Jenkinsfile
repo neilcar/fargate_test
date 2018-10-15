@@ -12,6 +12,7 @@ node {
         sh 'tar xvfz fargate_defender.tar.gz'
         sh 'curl -u $TL_USER:$TL_PASSWORD -o Fargate_Dockerfile https://$TL_CONSOLE/api/v1/images/dockerfile?consoleaddr=$TL_CONSOLE&imagename=neilcar/fargate_demo'
         sh 'cat Dockerfile Fargate_Dockerfile > Dockerfile'
+        sh 'echo Dockerfile'
     }
 
     stage('Build image') {
