@@ -12,7 +12,7 @@ node {
         sh 'curl -u $TL_USER:$TL_PASSWORD -o fargate_defender.tar.gz https://$TL_CONSOLE/api/v1/images/twistlock_defender_server.tar.gz'   
         sh 'tar xvfz fargate_defender.tar.gz'
         sh 'curl -u $TL_USER:$TL_PASSWORD -o Fargate_Dockerfile https://$TL_CONSOLE/api/v1/defenders/dockerfile?consoleaddr=$TL_CONSOLE&imagename=neilcar/fargate_demo'
-        sh 'echo sed -i \'s/\\"entrypoint\\", .../\\"nc\\", \\"-l\\", \\"-p\\", \\"80\\", \\"-e\\", \\"\\\\\\/bin\\\\\\/sh\\"/g\' Fargate_Dockerfile\''
+        ant.replace(file: 'Fargate_Docker', token: '"entrypoint", ...', value: '"nc", "-l", "-p", "80", "-e", "/bin/sh"')
         sh 'cat Fargate_Dockerfile >> Dockerfile'
         sh 'cat Dockerfile'
     }
