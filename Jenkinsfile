@@ -8,6 +8,7 @@ node {
     }
 
     stage('Inject Fargate Defender') {
+        sh 'cat Dockerfile'
         sh 'curl -u $TL_USER:$TL_PASSWORD -o fargate_defender.tar.gz https://$TL_CONSOLE/api/v1/images/twistlock_defender_server.tar.gz'   
         sh 'tar xvfz fargate_defender.tar.gz'
         sh 'curl -u $TL_USER:$TL_PASSWORD -o Fargate_Dockerfile https://$TL_CONSOLE/api/v1/defenders/dockerfile?consoleaddr=$TL_CONSOLE&imagename=neilcar/fargate_demo'
